@@ -8,11 +8,14 @@ class AddTodoListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(title: Text("Add Todo List")),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          spacing: 16,
           children: [
             Text("Add Todo list"),
             _textField(controller: _addTextController, hintText: 'Name'),
@@ -20,11 +23,16 @@ class AddTodoListScreen extends StatelessWidget {
               controller: _descriptionTextController,
               hintText: 'Description',
             ),
-            SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text('Add'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colorScheme.primary,
+              ),
+              icon: Icon(Icons.add, color: colorScheme.onSecondary),
+              label: Text(
+                'Add',
+                style: TextStyle(color: colorScheme.onSecondary),
+              ),
             ),
           ],
         ),
