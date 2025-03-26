@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_list_with_bloc/cubit/todo_list.cubit.dart';
-import 'package:todo_list_with_bloc/model/todo_list.model.dart';
+import 'package:todo_list_with_bloc/bloc/todo_list_bloc.dart';
+
+import 'model/todo_list.model.dart';
 
 class TodoListScreen extends StatelessWidget {
   const TodoListScreen({super.key});
@@ -13,7 +14,7 @@ class TodoListScreen extends StatelessWidget {
       appBar: AppBar(title: Text("Todo List")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<TodoListCubit, List<TodoListModel>>(
+        child: BlocBuilder<TodoListBloc, List<TodoListModel>>(
           builder: (context, state) {
             return ListView.separated(
               shrinkWrap: true,
@@ -25,9 +26,9 @@ class TodoListScreen extends StatelessWidget {
                   subtitle: Text(todoList.createdAt.toString()),
                   trailing: IconButton(
                     onPressed: () {
-                      BlocProvider.of<TodoListCubit>(
+                      BlocProvider.of<TodoListBloc>(
                         context,
-                      ).removeTodoList(index: index);
+                      ).add(RemoveTodoListEvent(index: index));
                     },
                     icon: Icon(
                       Icons.delete_outline_outlined,
