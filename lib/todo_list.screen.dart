@@ -8,26 +8,33 @@ class TodoListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(title: Text("Todo List")),
-      body: Column(
-        children: [
-          Text("Todo List"),
-          BlocBuilder<TodoListCubit, List<TodoListModel>>(
-            builder: (context, state) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(state.elementAt(index).name),
-                    subtitle: Text(state.elementAt(index).description),
-                    trailing: Text(state.elementAt(index).createdAt.toString()),
-                  );
-                },
-                itemCount: state.length,
-              );
-            },
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocBuilder<TodoListCubit, List<TodoListModel>>(
+          builder: (context, state) {
+            return ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final todoList = state.elementAt(index);
+
+                return ListTile(
+                  title: Text(todoList.name),
+                  subtitle: Text(todoList.createdAt.toString()),
+                  tileColor: colorScheme.secondary,
+                  textColor: colorScheme.onSecondary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+              },
+              itemCount: state.length,
+              separatorBuilder: (context, index) => SizedBox(height: 16),
+            );
+          },
+        ),
       ),
 
       floatingActionButton: FloatingActionButton(
