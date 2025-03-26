@@ -4,14 +4,14 @@ import 'package:todo_list_with_bloc/bloc/todo_list_bloc.dart';
 
 import 'model/todo_list.model.dart';
 
-class TodoListScreen extends StatelessWidget {
-  const TodoListScreen({super.key});
+class TodoListBlocScreen extends StatelessWidget {
+  const TodoListBlocScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: Text("Todo List")),
+      appBar: AppBar(title: Text("Todo List Bloc")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TodoListBloc, List<TodoListModel>>(
@@ -51,7 +51,7 @@ class TodoListScreen extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/add_todo_list');
+          Navigator.pushNamed(context, '/add_todo_list_bloc');
         },
         tooltip: 'Add Todo List',
         child: Icon(Icons.add),

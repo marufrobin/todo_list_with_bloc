@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_with_bloc/bloc/todo_list_bloc.dart';
 
-class AddTodoListScreen extends StatelessWidget {
-  AddTodoListScreen({super.key});
+class AddTodoListBlocScreen extends StatelessWidget {
+  AddTodoListBlocScreen({super.key});
 
   final _addTextController = TextEditingController();
 

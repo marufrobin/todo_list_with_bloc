@@ -4,9 +4,13 @@ part of 'todo_list_bloc.dart';
 sealed class TodoListEvent {}
 
 class AddTodoListEvent extends TodoListEvent {
-  AddTodoListEvent({required String title});
+  final String title;
+
+  AddTodoListEvent({required this.title});
 }
 
 class RemoveTodoListEvent extends TodoListEvent {
-  RemoveTodoListEvent({required int index});
+  final int index;
+
+  RemoveTodoListEvent({required this.index});
 }
