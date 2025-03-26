@@ -16,6 +16,11 @@ class TodoListCubit extends Cubit<List<TodoListModel>> {
     emit([...state, todoList]);
   }
 
+  void removeTodoList({required int index}) {
+    final todoList = state.elementAt(index);
+    emit(state.where((element) => element != todoList).toList());
+  }
+
   @override
   void onChange(Change<List<TodoListModel>> change) {
     print(change.toString());

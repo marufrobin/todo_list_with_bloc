@@ -23,6 +23,14 @@ class TodoListScreen extends StatelessWidget {
                 return ListTile(
                   title: Text(todoList.name),
                   subtitle: Text(todoList.createdAt.toString()),
+                  trailing: IconButton(
+                    onPressed: () {
+                      BlocProvider.of<TodoListCubit>(
+                        context,
+                      ).removeTodoList(index: index);
+                    },
+                    icon: Icon(Icons.close, color: colorScheme.error),
+                  ),
                   tileColor: colorScheme.secondary,
                   textColor: colorScheme.onSecondary,
                   shape: RoundedRectangleBorder(
