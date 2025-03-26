@@ -54,3 +54,38 @@ onPressed: () {
 ## Todo list with Bloc
 
 `Todo_list.bloc.dart` is the bloc file that contains the logic of the todo list.
+
+```dart
+class TodoListBloc extends Bloc<TodoListEvent, List<TodoListModel>> {
+  TodoListBloc() : super([]) {
+    on<AddTodoListEvent>((event, emit) {
+      emit([
+        ...state,
+        TodoListModel(name: event.title, createdAt: DateTime.now()),
+      ]);
+    });
+
+    on<RemoveTodoListEvent>((event, emit) {
+      final todoList = state.elementAt(event.index);
+      emit(state.where((element) => element != todoList).toList());
+    });
+  }
+}
+```
+
+For adding a todo list, we need to call the `add` method and pass the name `AddTodoListEvent(title:)` of the todo list as a parameter.
+
+```dart
+onPressed: () {
+    BlocProvider.of<TodoListBloc>(context).add(AddTodoListEvent(title: _addTextController.text));
+
+},
+```
+
+For removing a todo list, we need to call the `add` method and pass the index `RemoveTodoListEvent(index:)` of the todo list as a parameter.
+
+```dart
+onPressed: () {
+  BlocProvider.of<TodoListBloc>(context).add(RemoveTodoListEvent(index: index));
+},
+```
