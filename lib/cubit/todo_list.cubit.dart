@@ -7,13 +7,24 @@ class TodoListCubit extends Cubit<List<TodoListModel>> {
   TodoListCubit() : super([]);
 
   void addTodoList({required String name}) {
+    if (name.isEmpty) {
+      addError('Name is required');
+      return;
+    }
+
     final todoList = TodoListModel(name: name, createdAt: DateTime.now());
     emit([...state, todoList]);
   }
 
   @override
   void onChange(Change<List<TodoListModel>> change) {
-    print(change);
+    print(change.toString());
     super.onChange(change);
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    log(error: error, stackTrace: stackTrace, "TodoListCubit");
+    super.onError(error, stackTrace);
   }
 }
